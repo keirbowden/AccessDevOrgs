@@ -1,0 +1,25 @@
+name: ci
+run-name: ${{ github.actor }} triggered CI build
+#on: [push]
+on:
+  schedule:
+    - cron:  '30 16 * * MON'
+jobs:
+  scratch-org-ci:
+    runs-on: ubuntu-latest
+    environment: CI
+    steps:
+      - uses: actions/checkout@v4
+        with: 
+          ref: develop
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - name: 'Install CLI'
+        run: npm install @salesforce/cli --location=global
+      - run: sf --version
+      - name: 'Authenticate to dev hub'
+        run: |
+            echo ${{ secrets.AGENTFORCE_DEV_URL }} > ./AGENTFORCE_DEV_URL.txt
+            ls -al ./AGENTFORCE_DEV_URL.txt
+            sf org login sfdx-url -f ./DEVHUB_AUTH_URL.txt -a DevOrgRefresh -d
