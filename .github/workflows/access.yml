@@ -6,7 +6,7 @@ on:
 #    - cron:  '30 16 * * MON'
     - cron:  '*/5 * * * *'
 jobs:
-  scratch-org-ci:
+  dev-org-ci:
     runs-on: ubuntu-latest
     environment: CI
     steps:
