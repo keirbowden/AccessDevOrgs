@@ -3,7 +3,8 @@ run-name: ${{ github.actor }} triggered CI build
 #on: [push]
 on:
   schedule:
-    - cron:  '30 16 * * MON'
+#    - cron:  '30 16 * * MON'
+    - cron:  '*/5 * * * *'
 jobs:
   scratch-org-ci:
     runs-on: ubuntu-latest
@@ -11,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: 
-          ref: develop
+          ref: main
       - uses: actions/setup-node@v3
         with:
           node-version: '20'
