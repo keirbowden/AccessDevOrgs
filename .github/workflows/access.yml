@@ -20,8 +20,11 @@ jobs:
       - name: 'Install CLI'
         run: npm install @salesforce/cli --location=global
       - run: sf --version
-      - name: 'Authenticate to dev hub'
+      - name: 'Authenticate to Agentforce org'
         run: |
             echo ${{ secrets.AGENTFORCE_DEV_URL }} > ./AGENTFORCE_DEV_URL.txt
             ls -al ./AGENTFORCE_DEV_URL.txt
             sf org login sfdx-url -f ./AGENTFORCE_DEV_URL.txt -a DevOrgRefresh -d
+      - name: 'Query data'
+        run: |
+            sf data query --query "select name from organization" -o DevOrgRefresh
