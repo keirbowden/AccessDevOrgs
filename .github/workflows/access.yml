@@ -4,7 +4,8 @@ run-name: ${{ github.actor }} triggered CI build
 on:
   schedule:
 #    - cron:  '30 16 * * MON'
-    - cron:  '*/5 * * * *'
+    - cron:  '*/15 * * * *'
+  workflow_dispatch:
 jobs:
   dev-org-ci:
     runs-on: ubuntu-latest
